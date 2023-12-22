@@ -1,0 +1,27 @@
+devices:
+  R1:
+    alias: router1
+    type: ios
+    os: iosxe
+    credentials:
+      default:
+        username: cisco
+        password: cisco
+    connections:
+      a:
+        protocol: telnet
+        ip: 127.0.0.1
+        port: 5001
+  R2:
+    alias: router2
+    type: ios
+    os: iosxe
+    credentials:
+      default:
+        username: cisco
+        password: cisco
+    connections:
+      a:
+        protocol: telnet
+        ip: 127.0.0.1
+        port: 5002
