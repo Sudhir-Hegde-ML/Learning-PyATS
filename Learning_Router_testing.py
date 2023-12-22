@@ -18,6 +18,11 @@ logger = logging.getLogger(__name__)
 project_id = "88d34736-b2a6-4086-b400-43556d9f74f3"
 # Replace with the node IDs you want to start
 node_ids = ["128dd764-bd3a-4909-9082-48fe5e919760", "2ae77fb4-e860-4747-b20c-8867fc5179cb"]
+# Change according to your needs
+interface_name_to_find = "FastEthernet0/0"
+expected_ip = '10.1.1.2'
+expected_protocol = 'up'
+expected_status = 'up'
 
 #-----------------------------Run Commands on Terminal------------------------------------#
 def run_command(command):
@@ -32,7 +37,6 @@ def run_command(command):
 #---------------------------------------END----------------------------------------------#
 
 #-----------------------Regex for validating ip status and protocol----------------------#
-ip_address_to_find ="10.1.1.1"
 def find_ip_status(interface_name, output):
         # Define the regular expression pattern
         pattern = re.compile(rf"{interface_name}\s+([\d.]+)\s+\S+\s+\S+\s+(\w+)\s+(\w+)")
@@ -54,12 +58,7 @@ def Validation(router):
     # Perform main logic here
     print(f"Connected to {router.name}")
     output= router.execute("sh ip int brief")
-    # Change according to your needs
-    interface_name_to_find = "FastEthernet0/0"
-    expected_ip = '10.1.1.2'
-    expected_protocol = 'up'
-    expected_status = 'up'
-    
+        
     ipaddress, status, protocol= find_ip_status(interface_name_to_find, output)
     if ipaddress == expected_ip and status == expected_status and protocol == expected_protocol:
         print("The router information is validated")
@@ -159,11 +158,8 @@ class CommonCleanup(aetest.CommonCleanup):
     '''
     @aetest.subsection
     def stop_nodes(self):
-    # Replace with the node IDs you want to start
-        node_ids = ["128dd764-bd3a-4909-9082-48fe5e919760", "2ae77fb4-e860-4747-b20c-8867fc5179cb"]
-
         for node_id in node_ids:
-            print(f"Starting node with ID: {node_id}")
+            print(f"Stopping node with ID: {node_id}")
             command = f'curl -X POST "http://localhost:3080/v2/projects/{project_id}/nodes/{node_id}/stop" -d "{{}}"'
             response = run_command(command)
             print(response)

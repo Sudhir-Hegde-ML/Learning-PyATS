@@ -1,5 +1,5 @@
 
-# Project Title: pyATS Cisco Router Connection and Verification with GNS3 Integration
+# Project Title: pyATS Cisco Router Connection and Verification with GNS3 Integration (Beginners Guide)
 
 Welcome to the pyATS Cisco Router Connection and Verification project with GNS3 Integration! This project serves as a comprehensive guide on using pyATS and aetest to connect two Cisco routers, extract information for verification, and seamlessly integrate with GNS3 for network topology emulation. Whether you're a network engineer, Python developer, or automation enthusiast, this project provides valuable insights into leveraging pyATS within a GNS3 environment.
 
@@ -165,7 +165,7 @@ deactivate
 ```
 **Additional Notes:**
 
-ake sure to activate your virtual environment whenever you want to work on your project using pyATS.
+Make sure to activate your virtual environment whenever you want to work on your project using pyATS.
 
 if you're planning to use additional pyATS libraries, you can install them in the same virtual environment by running pip install **<library-name>** after activating the environment.
 
@@ -174,3 +174,119 @@ Always create a virtual environment for each project to avoid conflicts between 
 By following these steps, you'll have a virtual environment set up with pyATS installed, allowing you to work on your project in an isolated and controlled environment.
 
 [For Detailed Installation](https://pubhub.devnetcloud.com/media/pyats/docs/getting_started/index.html)
+
+## Installation of this Project
+
+### Step 1: Set Up a Virtual Environment
+
+```bash
+
+# Create a new directory for your project
+mkdir my_pyats_project
+
+# Navigate to the project directory
+cd my_pyats_project
+
+# Create a virtual environment
+python -m venv <desired-name>
+
+# Activate the virtual environment
+# On Windows
+venv\Scripts\activate
+
+# On Unix or MacOS
+source bin/activate .
+```
+### Step 2: Fork this Project on GitHub
+
+* Visit this project's GitHub repository.
+* Click on the "Fork" button in the upper right corner to create a copy of the repository in your GitHub account.
+
+### Step 3: Clone Your Forked Repository
+
+```bash
+
+# Clone your forked repository
+git clone https://github.com/your-username/your-pyats-project.git
+
+# Navigate to the project directory
+cd your-pyats-project
+```
+### Step 4: Update Testbed and Python Script
+
+Modify the testbed.yaml file in the tests directory to match your network setup.
+
+```yaml
+
+    devices:
+      iosxe_1:
+        alias: R1
+        type: iosxe
+        connections:
+          a:
+            protocol: telnet
+            ip: your_device_ip
+            port: your_device_port
+            credentials:
+              username: your_username
+              password: your_password
+```
+Update your Python test script accordingly.
+
+### Step 5: Install Dependencies
+
+```bash
+
+# Install project dependencies
+pip install -r requirements.txt
+```
+
+### Step 6: Commit Changes and Push to Your Fork
+
+```bash
+
+# Add and commit your changes
+git add .
+git commit -m "Update testbed and script for my setup"
+
+# Push the changes to your forked repository
+git push origin main
+```
+
+### Step 7: Endpoint API Integration with GNS3
+
+* In GNS3, set up an HTTP/REST endpoint in the GNS3 Server settings.
+    
+* Disable password protection for the GNS3 server by navigating to "Edit" > "Preferences" > "Server" and unchecking the "Protect server with password" option.
+* Modify your Python script to interact with the GNS3 API for router start/stop actions.
+
+For more Information, [Read](https://gns3-server.readthedocs.io/en/stable/)
+
+### Step 8: Test Your Project
+
+```bash
+
+# Run your PyATS test script
+pyats run job your_test_script.py
+```
+### Step 9: Deactivate Virtual Environment
+
+```bash
+
+# Deactivate the virtual environment
+deactivate
+```
+
+**Notes:**
+
+* Replace placeholders (like your_device_ip, your_device_port, your_username, etc.) with your actual values.
+* The specifics of GNS3 API integration depend on your GNS3 setup. Refer to the GNS3 API documentation for details.
+
+
+## Router Installation
+
+The project includes router and topology files that are ready to use. Feel free to leverage them at your discretion based on your specific network setup. The router configurations are available in the `routers` directory, and the topology file is located in the `topology` directory.
+## Feedback
+
+If you have any feedback, please reach out to me at sudhirhegde242@gmail.com
+
